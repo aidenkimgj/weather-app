@@ -2,16 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 
-const Weather = ({ temp }) => {
+const Weather = ({ temp, condition }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{temp}</Text>
+      <Text style={styles.temp}>{temp}</Text>
+      <Text style={styles.condition}>{condition}</Text>
     </View>
   );
 };
 
 Weather.propTypes = {
   temp: PropTypes.number.isRequired,
+  condition: PropTypes.oneOf([
+    "Thunderstorm",
+    "Drizzle",
+    "Rain",
+    "Snow",
+    "Mist",
+    "Smoke",
+    "Haze",
+    "Dust",
+    "Ash",
+    "Squall",
+    "Tornado",
+    "Clear",
+    "Clouds",
+  ]).isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -21,8 +37,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#1fc7ff",
   },
-  text: {
+  temp: {
     color: "#182422",
+    fontSize: 50,
+  },
+  condition: {
+    color: "#edeff0",
     fontSize: 20,
   },
 });
