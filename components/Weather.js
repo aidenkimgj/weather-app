@@ -1,50 +1,88 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Switch, Text, View } from "react-native";
-import { MaterialCommunityIcons, Entypo, Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
-const weatherName = condition => {
-  switch (condition) {
-    case "Thunderstorm":
-      return <Ionicons name="thunderstorm-outline" size={60} color="black" />;
-      break;
-    case "Drizzle":
-      return <Ionicons name="rainy-sharp" size={60} color="black" />;
-      break;
-    case "Rain":
-      return <Ionicons name="rainy-outline" size={60} color="black" />;
-      break;
-    case "Snow":
-      return <Ionicons name="snow-sharp" size={60} color="black" />;
-      break;
-    case ("Mist", "Smoke", "Haze", "Dust", "Ash", "Squall"):
-      return <Entypo name="air" size={60} color="black" />;
-      break;
-    case "Tornado":
-      return (
-        <MaterialCommunityIcons
-          name="weather-tornado"
-          size={60}
-          color="black"
-        />
-      );
-      break;
-    case "Clear":
-      return <Ionicons name="sunny-outline" size={60} color="black" />;
-    default:
-      return <Ionicons name="cloudy-outline" size={60} color="black" />;
-      break;
-  }
+const weatherName = {
+  Thunderstorm: {
+    icon: "weather-lightning-rainy",
+    gradient: ["#000C40", "#F0F2F0"],
+  },
+
+  Drizzle: {
+    icon: "weather-pouring",
+    gradient: ["#536976", "#BBD2C5"],
+  },
+
+  Rain: {
+    icon: "weather-rainy",
+    gradient: ["#43C6AC", "#191654"],
+  },
+
+  Snow: {
+    icon: "weather-snowy",
+    gradient: ["#D4D3DD", "#EFEFBB"],
+  },
+  Tornado: {
+    icon: "weather-tornado",
+    gradient: ["#0F2027", "#203A43", "#2C5364"],
+  },
+  Clear: {
+    icon: "weather-sunny",
+    gradient: ["#2980B9", "#6DD5FA", "#ffffff"],
+  },
+
+  Mist: {
+    icon: "weather-fog",
+    gradient: ["#4DA0B0", "#D39D38"],
+  },
+  Smoke: {
+    icon: "weather-fog",
+    gradient: ["#334d50", "#cbcaa5"],
+  },
+  Haze: {
+    icon: "weather-fog",
+    gradient: ["#F1F2B5", "#135058"],
+  },
+
+  Dust: {
+    icon: "weather-fog",
+    gradient: ["#CCCCB2", "#757519"],
+  },
+
+  Ash: {
+    icon: "weather-fog",
+    gradient: ["#F0C27B", "#4B1248"],
+  },
+
+  Squall: {
+    icon: "weather-fog",
+    gradient: ["#77A1D3", "#79CBCA", "#E684AE"],
+  },
+
+  Clouds: {
+    icon: "weather-cloudy",
+    gradient: ["#8e9eab", "#eef2f3"],
+  },
 };
 
 const Weather = ({ temp, condition, description, city }) => {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={weatherName[condition].gradient}
+      style={styles.container}
+    >
+      <StatusBar barStyle="light-content"></StatusBar>
       <Text style={styles.city}>{city}</Text>
-      {weatherName(condition)}
+      <MaterialCommunityIcons
+        name={weatherName[condition].icon}
+        size={60}
+        color="white"
+      />
       <Text style={styles.temp}>{temp}</Text>
       <Text style={styles.description}>{description}</Text>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -70,17 +108,18 @@ const Weather = ({ temp, condition, description, city }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#1fc7ff",
   },
   city: {
-    color: "white",
+    color: "grey",
     fontSize: 50,
+    marginTop: 100,
     marginBottom: 20,
   },
   temp: {
-    color: "#182422",
+    color: "white",
     fontSize: 50,
   },
   condition: {

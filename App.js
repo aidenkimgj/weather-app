@@ -29,7 +29,6 @@ const App = () => {
     setCondition(main);
     setDescription(description);
     setCity(name);
-    console.log("city: ", name);
   };
   const getLocation = async () => {
     try {
@@ -38,7 +37,6 @@ const App = () => {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync();
       getWeather(latitude, longitude);
-      console.log("latitude:", latitude, "longitude", longitude);
     } catch (error) {
       Alert.alert("Can't find you.");
       setIsLoding(false);
