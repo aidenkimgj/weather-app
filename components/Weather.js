@@ -37,17 +37,10 @@ const weatherName = condition => {
   }
 };
 
-const Weather = ({ temp, condition, description }) => {
-  console.log(
-    "temp: ",
-    temp,
-    "condition: ",
-    condition,
-    "description: ",
-    description
-  );
+const Weather = ({ temp, condition, description, city }) => {
   return (
     <View style={styles.container}>
+      <Text style={styles.city}>{city}</Text>
       {weatherName(condition)}
       <Text style={styles.temp}>{temp}</Text>
       <Text style={styles.description}>{description}</Text>
@@ -80,6 +73,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#1fc7ff",
+  },
+  city: {
+    color: "white",
+    fontSize: 50,
+    marginBottom: 20,
   },
   temp: {
     color: "#182422",
