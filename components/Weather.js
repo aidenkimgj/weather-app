@@ -22,7 +22,7 @@ const weatherName = {
 
   Snow: {
     icon: "weather-snowy",
-    gradient: ["#D4D3DD", "#EFEFBB"],
+    gradient: ["#EFEFBB", "#D4D3DD"],
   },
   Tornado: {
     icon: "weather-tornado",
@@ -43,7 +43,7 @@ const weatherName = {
   },
   Haze: {
     icon: "weather-fog",
-    gradient: ["#F1F2B5", "#135058"],
+    gradient: ["#135058", "#F1F2B5"],
   },
 
   Dust: {
@@ -68,15 +68,16 @@ const weatherName = {
 };
 
 const Weather = ({ temp, condition, description, city }) => {
+  let _condition = "Clear";
   return (
     <LinearGradient
-      colors={weatherName[condition].gradient}
+      colors={weatherName[_condition].gradient}
       style={styles.container}
     >
       <StatusBar barStyle="light-content"></StatusBar>
       <Text style={styles.city}>{city}</Text>
       <MaterialCommunityIcons
-        name={weatherName[condition].icon}
+        name={weatherName[_condition].icon}
         size={60}
         color="white"
       />
@@ -86,24 +87,26 @@ const Weather = ({ temp, condition, description, city }) => {
   );
 };
 
-// Weather.propTypes = {
-//   temp: PropTypes.number.isRequired,
-//   condition: PropTypes.oneOf([
-//     "Thunderstorm",
-//     "Drizzle",
-//     "Rain",
-//     "Snow",
-//     "Mist",
-//     "Smoke",
-//     "Haze",
-//     "Dust",
-//     "Ash",
-//     "Squall",
-//     "Tornado",
-//     "Clear",
-//     "Clouds",
-//   ]).isRequired,
-// };
+Weather.propTypes = {
+  temp: PropTypes.number.isRequired,
+  condition: PropTypes.oneOf([
+    "Thunderstorm",
+    "Drizzle",
+    "Rain",
+    "Snow",
+    "Mist",
+    "Smoke",
+    "Haze",
+    "Dust",
+    "Ash",
+    "Squall",
+    "Tornado",
+    "Clear",
+    "Clouds",
+  ]).isRequired,
+  description: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   description: {
-    color: "grey",
+    color: "white",
     fontSize: 20,
   },
 });
