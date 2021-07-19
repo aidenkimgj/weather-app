@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Alert } from "react-native";
-import { Loading, Weather } from "./components";
-import * as Location from "expo-location";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
+import { Loading, Weather } from './components';
+import * as Location from 'expo-location';
+import axios from 'axios';
 
-const API_KEY = "b7fd9eb99a43d2167bf33830f871d427";
+const API_KEY = 'ac0c8a710f68473924a21043fd62cb93';
 
 const App = () => {
   const [isLoading, setIsLoding] = useState(true);
@@ -23,7 +23,8 @@ const App = () => {
     } = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
-
+    console.log('weather main', main);
+    console.log('weather des', description);
     setIsLoding(false);
     setTemp(temp);
     setCondition(main);
